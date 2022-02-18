@@ -1,5 +1,5 @@
 # 响应触摸事件
-![响应触摸事件官方文档](https://developer.android.com/training/graphics/opengl/touch?hl=zh-cn)
+[响应触摸事件官方文档](https://developer.android.com/training/graphics/opengl/touch?hl=zh-cn)
 
 让OpenGL ES应用响应触摸互动关键是拓展GLSurfaceView实现以替换onTouchEvent(),从而监听触摸事件；
 
