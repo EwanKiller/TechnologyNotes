@@ -1,6 +1,4 @@
-# GPU概念和基础架构
-
-## 名词解释
+# GPU名词解释
 
 - GPC:Graphic Process Cluster（图形处理簇）
 - TPC:Texture Process Cluster（纹理处理簇）
@@ -20,30 +18,3 @@
 - Register File:寄存器
 - Poly Morph Engine:多边形引擎
 - Execution Context:执行上下文
-
-## 核心组件结构与关系
-
-### 包含关系
-- GPC
-  - TPC
-    - SM
-      -  Poly Morph Engine
-         -  Vertex Fetch
-         -  Tessellator
-         -  Viewport Transform
-         -  Attribute Setup
-         -  Stream Output
-      -  Core
-         -  ALU
-         -  FPU
-         -  Execution Context
-         -  Detch
-         -  Decode
-      -  L1 Cache
-         -  Instruction L1
-         -  Data L1
-      -  Shared memory
-      -  SP
-      -  SFU
-      -  Instruction Fetch/Dispatch
-    - TEX  
