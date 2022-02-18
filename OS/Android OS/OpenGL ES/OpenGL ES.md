@@ -20,5 +20,5 @@ Android框架下有两个基本类，用于通过OpenGL ES API来创建和操作
 ### GLSurfaceView
 
 此类是一个View，可以使用OpenGL API调用在其中绘制和操控对象，其功能类似于SurfaceView。可以通过创建GLSurfaceView的实例并将Renderer添加到其中来使用此类；
-不过，如果要捕获触屏事件，则应该通过拓展GLSurfaceView类来实现触摸监听程序![](../GLSurfaceView/TouchEvent.md)；
+不过，如果要捕获触屏事件，则应该通过拓展GLSurfaceView类来实现[触摸监听程序实现](../GLSurfaceView/TouchEvent.md)；
 
