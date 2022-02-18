@@ -1,4 +1,4 @@
-# 记录一些 Xcode使用过程中的点
+# Xcode使用知识点记录
 
 ## 快捷键
 
@@ -10,17 +10,11 @@
 - command + 1 : 选择导航栏-目录结构
 - command + 0 : 关闭导航栏
 - Command + a and contro + i ：自动排版
-
-## 如何在Xcode中使用Eigen数学库
-
-```
-brew install eigen  // 安装eigen
-brew list eigen // 查询eigen的安装路径
-```
+- Command + shift + V : 切换Markdown预览
 
 - 打开Xcode中的 project.xcodeproj，找到Header Search Paths，在里面填上brew 安装的eigen库的路径，一般来说是    /usr/local/Cellar/eigen/3.3.9/include/
 
-## 如何安装和配置opencv
+## OpenCV安装和配置
 
 ```
 brew install opencv // 安装opencv
@@ -42,10 +36,9 @@ pkg-config --libs opencv4  // 得到所有的Linker Flags,粘贴内容设置其�
 
 - 找到Building Settings -> Other Linker Flags，添加Linker Flags
 
-## 如何在Xcode中使用Eigen数学库
-
+## Xcode中使用Eigen数学库
 ```
-brew install eigen 
+brew install eigen  // 安装eigen
+brew list eigen // 查询eigen的安装路径
 ```
-
 然后在打开Xcode中的 project.xcodeproj，找到Header Search Paths，在里面填上brew 安装的eigen库的路径，一般来说是    /usr/local/Cellar/eigen/3.3.9/include/

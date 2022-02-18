@@ -1,4 +1,4 @@
-# Android
+# Android Project Settings
 
 ## could not find tools.jar
 
