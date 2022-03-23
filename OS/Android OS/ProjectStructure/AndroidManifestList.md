@@ -1,11 +1,7 @@
-# Android Project Settings
+# AndroidManifest.xml
 
-## could not find tools.jar
+## 蓝牙权限设置
 
-- 打开安卓工程中的 gradle.properties
-- 加入一行 org.gradle.java.home=/Library/Java/JavaVirtualMachines/jdk1.8.0_291.jdk/Contents/Home
-
-## Android Bluetooth permission in Manifest
 ```html
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,6 +38,3 @@
 
 </manifest>
 ```
-
-
-
