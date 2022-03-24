@@ -67,6 +67,7 @@ public class ImageReader
     public void Read(String name) {}
 }
 ```
+
 ```c#
 AndroidJavaObject javaObject = androidJavaClass.GetStatic<AndroidJavaObject>("com.ewan.renderplugin.ImageReader");
 jo.Call("Read", "Name of Image");
@@ -75,6 +76,7 @@ jo.Call("Read", "Name of Image");
 ### Android Java与NDK通信
 
 1. Java call C/C++
+
 ```Java
 package com.ewan.java;
 public class JavaClass
@@ -94,3 +96,8 @@ extern "C" JNIEXPORT void JNICALL Java_com_ewan_java_JavaClass_NativeFunction(JN
     env->ReleaseIntArrayElements(data, array, NULL);
 }
 ```
+
+### Unity的InputFiled不显示原生输入框
+
+- InputFiled组件下有个Hide Mobile Input即可以隐藏原生输入框，只调用原生键盘；
+- 还有个Hide Soft Keyboard可以禁用原生键盘；
