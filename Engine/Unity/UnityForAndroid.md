@@ -55,6 +55,12 @@ dependencies {
 }
 ```
 
+### 获取Unity Context
+
+```c#
+AndroidJavaObject context = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+```
+
 ### Unity与Android通信
 
 1. C# call Java
