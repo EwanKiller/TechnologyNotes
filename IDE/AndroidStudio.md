@@ -28,3 +28,10 @@ javah -jni com.ewan.autogenjni.JniLib
 ## Unity打包的工程打开直接failed
 
 https://segmentfault.com/a/1190000039224031
+
+## Terminal编译build项目
+
+`./gradlew build`
+
+`./gradlew build -Dorg.gradle.java.home="JDK absolute path"`
+
