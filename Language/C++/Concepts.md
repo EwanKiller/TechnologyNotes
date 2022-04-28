@@ -194,7 +194,13 @@ char* p = reinterpret_cast<char*>(&d);
 double* dp = reinterpret_cast<double*>(p);
 std::cout << *dp;  // 1.21
 ```
-- const_cast
+- const_cast：将const/volatile类型转换为 non-const/non-volatile类型；
+
+  ```c++
+  const int n = 100;
+  int *p = const_cast<int*>(&n); // &n为地址，是一个const int*类型，所以需要转换后才能赋值给non-const int*类型；
+  ```
+
 - dynamic_cast 
 
 ## 修饰符
