@@ -155,7 +155,38 @@
   - 成员变量里含有其他类的指针
 
 ## 四种强制转换类型
-- static_cast
+- static_cast : 良性转换
+  - 原有类型转换如int转short，non-const转const；
+  - void指针转换为其他原有类型指针；
+  - 有类型转换函数，构造转换函数：
+  ```c++
+  class Complex{
+  public:
+      Complex(double real = 0.0, double imag = 0.0): m_real(real), m_imag(imag){ }
+    	Complex(double real): m_real(read),m_imag(0){ } // 转换构造函数
+  public:
+      operator double() const { return m_real; }  //类型转换函数
+  private:
+      double m_real;
+      double m_imag;
+  };
+  
+  int main(){
+      //下面是正确的用法
+      int m = 100;
+      Complex c(12.5, 23.8);
+      long n = static_cast<long>(m);  //宽转换，没有信息丢失
+      char ch = static_cast<char>(m);  //窄转换，可能会丢失信息
+      int *p1 = static_cast<int*>( malloc(10 * sizeof(int)) );  //将void指针转换为具体类型指针
+      void *p2 = static_cast<void*>(p1);  //将具体类型指针，转换为void指针
+      double real= static_cast<double>(c);  //调用类型转换函数
+     
+      //下面的用法是错误的
+      float *p3 = static_cast<float*>(p1);  //不能在两个具体类型的指针之间进行转换
+      p3 = static_cast<float*>(0X2DF9);  //不能将整数转换为指针类型
+      return 0;
+  }
+  ```
 - reinterpret_cast ： 转换无关类型，完全复制二进制比特位到目标对象，转后的值与原始对象无关，但比特位完全一致，前后无精度损失；即重新解释二进制比特位，比如可以把一个double转换为一个char，并且还可以无损失的转换回来；
 ```c++
 double d = 1.21;
