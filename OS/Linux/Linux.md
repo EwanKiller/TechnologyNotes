@@ -20,6 +20,25 @@ less <filename>
 
 cp  <filename>  <destination path>
 
+
+
+## 终端设置代理
+
+1. `sudo vim ~/.bashrc`
+
+2. 在末尾加上
+
+   ```bash
+   export http_proxy='http://127.0.0.1:41091'
+   export https_proxy='http://127.0.0.1:41091'
+   ```
+
+   
+
+3. `source ~/.bashrc`
+
+
+
 ## 终端apt设置代理
 
 1. 方法一
