@@ -102,3 +102,11 @@ java -version
 sudo update-alternatives --config java
 ```
 
+
+
+## 执行脚本报 ’/usr/bin/env: sh\r":没有那个文件或目录
+
+- vim打开文件
+- `set ff`
+- `set ff=unix`
+- `wq!`
