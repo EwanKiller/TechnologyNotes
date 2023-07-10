@@ -45,3 +45,59 @@ dependencies {
 	androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 ```
+
+## 修改VersionName和输出包名匹配时间戳
+```
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 29
+    ndkVersion '21.4.7075529'
+
+    defaultConfig {
+        applicationId "com.seed.seedremoteplayer"
+        minSdkVersion 29
+        versionCode 1
+
+		// 修改VersionName为构建时间戳
+        LocalDateTime compileTime = LocalDateTime.now()
+        DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
+        String formattedTime = compileTime.format(formatter)
+        versionName formattedTime
+
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            buildConfigField "boolean", "ENABLE_DEBUG", "true"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            LocalDateTime compileTime = LocalDateTime.now()
+            DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
+            String formattedTime = compileTime.format(formatter)
+            // 自定义输出apk名匹配时间戳
+            outputFileName = "remoteplayer_" + formattedTime +".apk"
+        }
+    }
+}
+
+dependencies {
+    implementation files('libs/SeedXRSDK-release.aar')
+}
+
+```
