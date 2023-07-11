@@ -101,3 +101,114 @@ dependencies {
 }
 
 ```
+
+## 引用同层级的其他build.gradle并解压aar中so
+```
+# build.gradle
+apply plugin: 'com.android.application'
+apply from: "$projectDir/build_sdk.gradle"
+
+android {
+
+    compileSdkVersion 29
+    ndkVersion '21.4.7075529'
+
+    defaultConfig {
+        applicationId "com.seed.seedremoteplayer"
+        minSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+    }
+
+}
+```
+
+```
+# build_sdk.gradle
+
+def OBOE_SDK_ROOT= file("${buildDir}/oboe")
+def CLOUDXR_SDK_ROOT= file("${buildDir}/CloudXR")
+def QVR_SDK_ROOT = file("${buildDir}/QVR")
+def SEED_XR_SDK_ROOT= file("${buildDir}/SeedXR")
+
+android {
+    defaultConfig {
+        externalNativeBuild {
+            cmake {
+                arguments "-DOBOE_SDK_ROOT=${OBOE_SDK_ROOT}"
+                arguments "-DCLOUDXR_SDK_ROOT=${CLOUDXR_SDK_ROOT}"
+                arguments "-DQVR_SDK_ROOT=${QVR_SDK_ROOT}"
+                arguments "-DSEED_XR_SDK_ROOT=${SEED_XR_SDK_ROOT}"
+            }
+        }
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.18.1'
+        }
+    }
+
+    buildTypes {
+        release {
+            externalNativeBuild {
+                cmake {
+                    arguments "-DNDK_DEBUG=0"
+                }
+            }
+        }
+        debug {
+            externalNativeBuild {
+                cmake {
+                    arguments "-DNDK_DEBUG=1"
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+}
+
+// Extract the Oboe SDK
+task extractOboeSDK(type: Copy)  {
+    def sourceFile = file("${projectDir}/libs/oboe-1.5.0.aar")
+    from zipTree(sourceFile)
+    into OBOE_SDK_ROOT
+}
+
+// Extract the CloudXR SDK
+task extractCloudXRSDK(type: Copy)  {
+    def sourceFile = file("${projectDir}/libs/CloudXR.aar")
+    from zipTree(sourceFile)
+    into CLOUDXR_SDK_ROOT
+}
+
+// Extract the QVR SDK
+task extractQvrSDK(type: Copy) {
+    def sourceFile = file("${projectDir}/libs/sxrApi-release.aar")
+    from zipTree(sourceFile)
+    into QVR_SDK_ROOT
+}
+
+// Extract the SEED XR SDK
+task extractSeedXRSDK(type: Copy) {
+    def sourceFile = file("${projectDir}/libs/SeedXRSDK-release.aar")
+    from zipTree(sourceFile)
+    into SEED_XR_SDK_ROOT
+}
+
+preBuild.dependsOn(extractOboeSDK)
+preBuild.dependsOn(extractCloudXRSDK)
+preBuild.dependsOn(extractQvrSDK)
+preBuild.dependsOn(extractSeedXRSDK)
+```
