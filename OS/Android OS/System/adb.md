@@ -34,3 +34,11 @@ adb shell push <souce.so in PC> /system/lib64
 
 ```
 
+## adb查看内存占用情况
+```bash
+# -m 表示显示多少个
+# -n 表示执行几次top
+# -s 表示排序标准按照什么，6代表了RES 实际占用内存
+adb shell top -m 100 -n 1 -s 6
+```
+
